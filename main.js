@@ -27,7 +27,7 @@ async function main() {
     const artifactsEndpointParams = {
       owner: owner,
       repo: repo,
-      per_page = 100
+      per_page: 100
     };
 
     let artifacts = [];
