@@ -37,7 +37,7 @@ async function main() {
       .iterator(artifactsEndpoint, artifactsEndpointParams)) {
       console.log('artifacts data', artifactResponse, artifactResponse.data);
 
-      artifacts.push(artifactResponse.data
+      artifacts.concat(artifactResponse.data
         .filter(artifact => !artifact.expired)
         .filter(artifact => artifactName && !latest ? artifact.name === artifactName : true)
       );
@@ -63,7 +63,7 @@ async function main() {
     console.log('Artifacts', artifacts);
 
     if (artifacts && artifacts.length) {
-      for (const artifact of artifacts) {
+      for (let artifact of artifacts) {
         console.log("==> Artifact:", artifact.id);
 
         const size = filesize(artifact.size_in_bytes, { base: 10 });
