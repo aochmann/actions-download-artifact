@@ -15,7 +15,7 @@ async function main() {
 
     // optional
     const artifactName = core.getInput("name", { required: false });
-    const latest = core.getInput("latest", { required: false });
+    const latest = (core.getInput("latest", { required: false }) ?? 'false').toLowerCase() === 'true';
 
     const client = github.getOctokit(token);
 
