@@ -35,9 +35,7 @@ async function main() {
 
     for await (const artifactResponse of client.paginate
       .iterator(artifactsEndpoint, artifactsEndpointParams)) {
-      console.log('artifacts data', artifactResponse, artifactResponse.data);
-
-      artifacts.concat(artifactResponse.data
+        artifacts = artifacts.concat(artifactResponse.data
         .filter(artifact => !artifact.expired)
         .filter(artifact => artifactName && !latest ? artifact.name === artifactName : true)
       );
