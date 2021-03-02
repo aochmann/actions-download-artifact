@@ -65,9 +65,9 @@ async function main() {
     }
 
     if (artifacts && artifacts.length) {
-      artifacts = lodash
-        .groupBy(artifacts, a => a.name)
-        .map((value, key) => getLatest(value))
+      artifacts = lodash(artifacts)
+        .groupBy(artifact => artifact.name)
+        .map(value => getLatest(value))
         .value();
     }
 
@@ -88,7 +88,7 @@ async function main() {
           archive_format: "zip",
         });
 
-        const dir = artifactName ? pathname.join(path, artifact.name) : path;
+        const dir = artifactName ? path : pathname.join(path, artifact.name);
 
         fs.mkdirSync(dir, { recursive: true });
 
