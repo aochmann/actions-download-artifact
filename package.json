@@ -1,0 +1,16 @@
+{
+  "name": "action-download-artifact",
+  "version": "1.0.0",
+  "author": {
+    "name": "Adrian Ochmann"
+  },
+  "license": "LICENSE.md",
+  "main": "main.js",
+  "dependencies": {
+    "@actions/core": "^1.2.6",
+    "@actions/github": "^4.0.0",
+    "adm-zip": "^0.5.2",
+    "filesize": "^6.1.0",
+    "moment": "^2.29.1"
+  }
+}

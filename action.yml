@@ -1,0 +1,28 @@
+name: Download artifact
+description: Download and extract an artifact(s)
+author: aochmann
+branding:
+  icon: download
+  color: blue
+inputs:
+  github_token:
+    description: GitHub token
+    required: false
+    default: ${{github.token}}
+  repo:
+    description: Repository name with owner
+    required: false
+    default: ${{github.repository}}
+  name:
+    description: Artifact name (download all artifacts in not specified)
+    required: false
+  latest:
+    description: Download latest artifact
+    required: false
+  path:
+    description: Artifact unpack location
+    required: false
+    default: "./"
+runs:
+  using: node12
+  main: main.js
