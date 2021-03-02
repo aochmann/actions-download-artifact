@@ -5,6 +5,18 @@ const filesize = require('filesize')
 const moment = require('moment')
 const pathname = require('path')
 const fs = require("fs")
+const lodash = require('lodash')
+
+function getLatest(artifacts) {
+  var latestArtifact = artifacts.reduce((prev, cur, index) => {
+    var prevDate = new moment(prev.updated_at);
+    var curDate = new moment(cur.updated_at);
+
+    return curDate > prevDate && index ? cur : prev;
+  });
+
+  return latestArtifact
+}
 
 async function main() {
   try {
@@ -42,20 +54,21 @@ async function main() {
     }
 
     if (latest && artifacts && artifacts.length) {
-
       console.log('Get latest artifact');
 
-      var latestArtifact = artifacts.reduce((prev, cur, index) => {
-        var prevDate = new moment(prev.updated_at);
-        var curDate = new moment(cur.updated_at);
-
-        return curDate > prevDate && index ? cur : prev;
-      });
+      var latestArtifact = getLatest(artifacts);
 
       if (latestArtifact) {
         console.log('Latest artifact', latestArtifact);
         artifacts = [ latestArtifact ];
       }
+    }
+
+    if (artifacts && artifacts.length) {
+      artifacts = lodash
+        .groupBy(artifacts, a => a.name)
+        .map((value, key) => getLatest(value))
+        .value();
     }
 
     console.log('Artifacts', artifacts);
@@ -75,7 +88,7 @@ async function main() {
           archive_format: "zip",
         });
 
-        const dir = artifactName ? path : pathname.join(path, artifact.name);
+        const dir = artifactName ? pathname.join(path, artifact.name) : path;
 
         fs.mkdirSync(dir, { recursive: true });
 

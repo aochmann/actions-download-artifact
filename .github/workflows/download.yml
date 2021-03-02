@@ -35,7 +35,7 @@ jobs:
           path: artifact
 
       - name: Test
-        run: cat artifact/sha | grep $GITHUB_SHA
+        run: find . -name .*sha.* -print0 | xargs -0 -I {} cat {} | grep $GITHUB_SHA
 
   download-name:
     runs-on: ubuntu-latest
@@ -59,7 +59,7 @@ jobs:
           path: artifact
 
       - name: Test
-        run: cat artifact/sha | grep $GITHUB_SHA
+        run: cat artifact/artifact1/sha | grep $GITHUB_SHA
 
   download-multiple:
     runs-on: ubuntu-latest

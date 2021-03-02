@@ -11,6 +11,7 @@
     "@actions/github": "^4.0.0",
     "adm-zip": "^0.5.2",
     "filesize": "^6.1.0",
+    "lodash": "^4.17.21",
     "moment": "^2.29.1"
   }
 }
