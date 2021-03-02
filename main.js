@@ -49,7 +49,7 @@ async function main() {
       .iterator(artifactsEndpoint, artifactsEndpointParams)) {
         artifacts = artifacts.concat(artifactResponse.data
         .filter(artifact => !artifact.expired)
-        .filter(artifact => artifactName && !latest ? artifact.name === artifactName : true)
+        .filter(artifact => artifactName ? artifact.name === artifactName : true)
       );
     }
 
