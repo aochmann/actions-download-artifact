@@ -44,6 +44,9 @@ async function main() {
     }
 
     if (latest && artifacts && artifacts.length) {
+
+      console.log('Get latest artifact');
+
       var latestArtifact = artifacts.reduce((prev, cur, index) => {
         var prevDate = new moment(prev.updated_at);
         var curDate = new moment(cur.updated_at);
@@ -52,9 +55,12 @@ async function main() {
       });
 
       if (latestArtifact) {
+        console.log('Latest artifact', latestArtifact);
         artifacts = [ latestArtifact ];
       }
     }
+
+    console.log('Artifacts', artifacts);
 
     if (artifacts && artifacts.length) {
       for (const artifact of artifacts) {
