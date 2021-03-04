@@ -1,6 +1,6 @@
 # Download artifact GitHub Action
 
-An action that downloads and extracts uploaded artifact by name.
+An action that downloads and extracts uploaded artifact by name. Download artifact from repository - it's not dependent by any workflow.
 
 ## Usage
 
