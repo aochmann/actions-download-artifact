@@ -23,6 +23,11 @@ inputs:
     description: Artifact unpack location
     required: false
     default: "./"
+outputs:
+  found-artifact:
+    description: A boolean that indicates if the artifact was found.
+  path:
+    description: The path to the file or directory downloaded. If no artifact is found this will be an empty string.
 runs:
   using: node12
   main: main.js

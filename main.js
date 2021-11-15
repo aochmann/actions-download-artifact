@@ -74,6 +74,9 @@ async function main() {
     console.log('Artifacts', artifacts);
 
     if (artifacts && artifacts.length) {
+      core.setOutput("found-artifact", true);
+      core.setOutput("path", pathname.resolve(path));
+      
       for (let artifact of artifacts) {
         console.log("==> Artifact:", artifact.id);
 
@@ -103,6 +106,9 @@ async function main() {
 
         adm.extractAllTo(dir, true);
       }
+    } else {
+      core.setOutput("found-artifact", false);
+      core.setOutput("path", "");
     }
   } catch (error) {
     core.setFailed(error.message);

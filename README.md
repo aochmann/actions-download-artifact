@@ -26,3 +26,8 @@ An action that downloads and extracts uploaded artifact by name. Download artifa
     # Optional, defaults to current repo
     repo: ${{github.repository}}
 ```
+
+## Outputs
+
+- `found-artifact` - A boolean that indicates if the artifact was found.
+- `path` - The absolute path to where the artifact was downloaded to.
