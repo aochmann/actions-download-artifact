@@ -618,3 +618,5 @@ MigrationBackup/
 .ionide/
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,linux,macos,vscode,rider,visualstudio,node
+
+node_modules
