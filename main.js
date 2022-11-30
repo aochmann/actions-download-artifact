@@ -1,7 +1,7 @@
 const core = require("@actions/core");
 const github = require("@actions/github");
 const AdmZip = require("adm-zip");
-const filesize = require("filesize");
+const { filesize } = require("filesize");
 const moment = require("moment");
 const pathname = require("path");
 const fs = require("fs");
