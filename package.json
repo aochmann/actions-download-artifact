@@ -13,5 +13,8 @@
     "filesize": "^10.0.7",
     "lodash": "^4.17.21",
     "moment": "^2.29.4"
+  },
+  "devDependencies": {
+    "prettier": "^2.8.8"
   }
 }
