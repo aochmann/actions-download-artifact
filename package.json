@@ -7,11 +7,11 @@
   "license": "LICENSE.md",
   "main": "main.js",
   "dependencies": {
-    "@actions/core": "^1.2.6",
-    "@actions/github": "^4.0.0",
-    "adm-zip": "^0.5.2",
-    "filesize": "^6.1.0",
+    "@actions/core": "^1.10.0",
+    "@actions/github": "^5.1.1",
+    "adm-zip": "^0.5.10",
+    "filesize": "^10.0.7",
     "lodash": "^4.17.21",
-    "moment": "^2.29.1"
+    "moment": "^2.29.4"
   }
 }
