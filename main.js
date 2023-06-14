@@ -1,16 +1,17 @@
+// @ts-check
 const core = require("@actions/core");
 const github = require("@actions/github");
 const AdmZip = require("adm-zip");
-const filesize = require("filesize");
+const { filesize } = require("filesize");
 const moment = require("moment");
 const pathname = require("path");
 const fs = require("fs");
 const lodash = require("lodash");
 
 function getLatest(artifacts) {
-  var latestArtifact = artifacts.reduce((prev, cur, index) => {
-    var prevDate = moment(prev.updated_at);
-    var curDate = moment(cur.updated_at);
+  const latestArtifact = artifacts.reduce((prev, cur, index) => {
+    const prevDate = moment(prev.updated_at);
+    const curDate = moment(cur.updated_at);
 
     return curDate > prevDate && index ? cur : prev;
   });
@@ -56,7 +57,7 @@ async function main() {
     if (latest && artifacts && artifacts.length) {
       console.log("Get latest artifact");
 
-      var latestArtifact = getLatest(artifacts);
+      const latestArtifact = getLatest(artifacts);
 
       if (latestArtifact) {
         console.log("Latest artifact", latestArtifact);
@@ -64,7 +65,7 @@ async function main() {
       }
     }
 
-    if (artifacts && artifacts.length) {
+    if (artifacts?.length) {
       artifacts = lodash(artifacts)
         .groupBy((artifact) => artifact.name)
         .map((value) => getLatest(value))
@@ -73,7 +74,7 @@ async function main() {
 
     console.log("Artifacts", artifacts);
 
-    if (artifacts && artifacts.length) {
+    if (artifacts?.length) {
       for (let artifact of artifacts) {
         console.log("==> Artifact:", artifact.id);
 
@@ -81,7 +82,7 @@ async function main() {
 
         console.log("==> Downloading:", artifact.name + ".zip", `(${size})`);
 
-        const zip = await client.actions.downloadArtifact({
+        const zip = await client.rest.actions.downloadArtifact({
           owner: owner,
           repo: repo,
           artifact_id: artifact.id,
