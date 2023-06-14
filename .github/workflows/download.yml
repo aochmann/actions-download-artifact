@@ -1,11 +1,10 @@
 name: Download
 
 on:
+  pull_request:
   push:
     branches:
-      - master
-      - develop
-  pull_request:
+      - main
 
 jobs:
   wait:
@@ -19,21 +18,17 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-
-      - name: Set Node.js 12.x
-        uses: actions/setup-node@v1
+      - name: Use Node.js LTS
+        uses: actions/setup-node@v3
         with:
-          node-version: 12.x
-
-      - name: npm install
-        run: npm install
-
+          node-version: lts/hydrogen
+          cache: npm
+      - run: npm ci
       - name: Download
         uses: ./
         with:
           latest: true
           path: artifact
-
       - name: Test
         run: find . -name "*sha*" -print0 | xargs -0 -I {} cat {} | grep $GITHUB_SHA
 
@@ -43,21 +38,17 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-
-      - name: Set Node.js 12.x
-        uses: actions/setup-node@v1
+      - name: Use Node.js LTS
+        uses: actions/setup-node@v3
         with:
-          node-version: 12.x
-
-      - name: npm install
-        run: npm install
-
+          node-version: lts/hydrogen
+          cache: npm
+      - run: npm ci
       - name: Download
         uses: ./
         with:
           name: artifact1
           path: artifact
-
       - name: Test
         run: cat artifact/sha1 | grep $GITHUB_SHA
 
@@ -67,18 +58,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-
-      - name: Set Node.js 12.x
-        uses: actions/setup-node@v1
+      - name: Use Node.js LTS
+        uses: actions/setup-node@v3
         with:
-          node-version: 12.x
-
-      - name: npm install
-        run: npm install
-
+          node-version: lts/hydrogen
+          cache: npm
+      - run: npm ci
       - name: Download
         uses: ./
-
       - name: Test
         run: |
           cat artifact1/sha1 | grep $GITHUB_SHA
