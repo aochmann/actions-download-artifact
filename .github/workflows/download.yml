@@ -7,6 +7,9 @@ on:
       - develop
   pull_request:
 
+env:
+  NODE_VERSION: 20.x
+
 jobs:
   wait:
     runs-on: ubuntu-latest
@@ -20,10 +23,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Set Node.js 12.x
-        uses: actions/setup-node@v1
+      - name: Set Node.js version
+        uses: actions/setup-node@v3
         with:
-          node-version: 12.x
+          node-version: ${{env.NODE_VERSION}}
 
       - name: npm install
         run: npm install
@@ -45,9 +48,9 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Set Node.js 12.x
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
-          node-version: 12.x
+          node-version: ${{env.NODE_VERSION}}
 
       - name: npm install
         run: npm install
@@ -69,9 +72,9 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Set Node.js 12.x
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
-          node-version: 12.x
+          node-version: ${{env.NODE_VERSION}}
 
       - name: npm install
         run: npm install

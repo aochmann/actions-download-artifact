@@ -1,7 +1,7 @@
 const core = require('@actions/core')
 const github = require('@actions/github')
 const AdmZip = require('adm-zip')
-const filesize = require('filesize')
+const { filesize } = require("filesize");
 const moment = require('moment')
 const pathname = require('path')
 const fs = require("fs")
@@ -74,6 +74,10 @@ async function main() {
     console.log('Artifacts', artifacts);
 
     if (artifacts && artifacts.length) {
+      console.log('Artifact found')
+      core.setOutput('found-artifact', true)
+      core.setOutput('path', pathname.resolve(path))
+      
       for (let artifact of artifacts) {
         console.log("==> Artifact:", artifact.id);
 
@@ -81,7 +85,7 @@ async function main() {
 
         console.log("==> Downloading:", artifact.name + ".zip", `(${size})`);
 
-        const zip = await client.actions.downloadArtifact({
+        const zip = await client.rest.actions.downloadArtifact({
           owner: owner,
           repo: repo,
           artifact_id: artifact.id,
@@ -103,6 +107,10 @@ async function main() {
 
         adm.extractAllTo(dir, true);
       }
+    } else {
+      console.log('Artifact NOT found')
+      core.setOutput('found-artifact', false)
+      core.setOutput('path', '')
     }
   } catch (error) {
     core.setFailed(error.message);
